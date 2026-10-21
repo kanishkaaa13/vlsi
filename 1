@@ -1,0 +1,44 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.STD_LOGIC_ARITH.ALL;
+use IEEE.STD_LOGIC_UNSIGNED.ALL;
+Port ( a : in STD_LOGIC_VECTOR (3 downto 0);
+        b : in STD_LOGIC_VECTOR (3 downto 0);
+        sel : in STD_LOGIC_VECTOR (2 downto 0);
+        y : out STD_LOGIC_VECTOR (3 downto 0));
+end ALUBATCH;
+
+architecture Behavioral of ALUBATCH is
+begin
+  process(a, b, sel)
+  begin
+    case sel is
+      when "000" => y <= a + b;
+      when "001" => y <= a - b;
+      when "010" => y <= a AND b;
+      when "011" => y <= a OR b;
+      when "100" => y <= a XOR b;
+      when "101" => y <= a XNOR b;
+      when "111" => y <= a;
+      when others => y <= "0000";
+    end case;
+  end process;
+end Behavioral;
+
+a[0] Input P206
+a[1] Input P205 BANK0
+a[2] Input P203 BANK0
+a[3] Input P200 BANK0
+b[0] Input P192 BANK0
+b[1] Input P193 BANK0
+b[2] Input P189 BANK0
+b[3] Input P190 BANK0
+sel<0> Input P179 BANK0
+sel<1> Input P180 BANK0
+sel<2> Input P165 BANK0
+sel<3> Input P167 BANK0
+y<0> Output P164 BANK0
+y<1> Output P163 BANK0
+y<2> Output P162 BANK0
+
+
