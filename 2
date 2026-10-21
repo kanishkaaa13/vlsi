@@ -1,0 +1,57 @@
+library IEEE;
+              use IEEE.STD_LOGIC_1164.ALL;
+              use IEEE.STD_LOGIC_ARITH.ALL;
+              use IEEE.STD_LOGIC_UNSIGNED.ALL;
+entity shiftregister is
+    Port ( clk : in  STD_LOGIC;
+           reset : in  STD_LOGIC;
+           datain : in  STD_LOGIC_VECTOR (3 downto 0);
+           sel : in  STD_LOGIC_VECTOR (1 downto 0);
+           sl_in : in  STD_LOGIC;
+           sr_in : in  STD_LOGIC;
+           dataout : out  STD_LOGIC_VECTOR (3 downto 0));
+end shiftregister;
+
+architecture Behavioral of shiftregister is
+
+begin
+   process(reset, clk, sel, sl_in, sr_in, datain)
+   variable TEMP : STD_LOGIC_VECTOR (3 downto 0);
+
+begin
+   if reset = '1' then
+      TEMP := "0000";
+  
+   elsif clk'event and clk = '1' then
+         case Sel is	
+			     when "11" => TEMP := datain;
+				  when "01" => TEMP := TEMP(2 downto 0) & sl_in;
+				  when "10" => TEMP := sr_in & TEMP(3 downto 1);
+				  when others =>  NULL;
+			end case;
+	 end if;
+				  dataout <= TEMP;
+end process;
+
+end Behavioral;
+
+
+
+
+
+
+1 clk Clock 555: 1Hz Input P132
+2 reset Key0 Input P204
+3 dataout[0] TL1 Output P205
+4 dataout[0] TL2 Output P206
+5 dataout[0] TL3 Output P203
+6 dataout[0] TL4 Output P200
+7 datain[0] TL9 Input P192
+8 datain[1] TL10 Input P193
+9 datain[2] TL11 Input P189
+10 datain[3] TL12 Input P190
+11 SL_in TL17 Input P179
+12 SR_in TL18 Input P180
+13 sel[0] TL25 Input P165
+14 sel[1] TL26 Input P167
+
